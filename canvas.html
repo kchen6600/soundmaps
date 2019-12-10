@@ -12,35 +12,51 @@
       var keyData = {
       	"q": {
                   sound: 'C4',
-                  color: 'red'
+                  color: '#4E3D42',
+                  animation: 'rect',
+                  location: 20,
             },
             "w": {
                   sound: 'C#4',
-                  color: 'orange'
+                  color: '#85756E',
+                  animation: 'rect',
+                  location: 90,
             },
             "e": {
                   sound: 'D#4',
-                  color: 'yellow'
+                  color: '#8499B1',
+                  animation: 'rect',
+                  location: 160,
             },
             "r": {
                   sound: 'F4',
-                  color: 'green'
+                  color: '#5E807F',
+                  animation: 'rect',
+                  location: 250,
             },
             "u": {
                   sound: 'G4',
-                  color: '#729847'
+                  color: '#104F55',
+                  animation: 'rect',
+                  location: 340,
             },
       	"i": {
                   sound: 'G#4',
-                  color: 'red'
+                  color: '#556F7A',
+                  animation: 'rect',
+                  location: 430,
             },
             "o": {
                   sound: 'A#4',
-                  color: 'red'
+                  color: '#88958D',
+                  animation: 'rect',
+                  location: 520,
             },
             "p": {
                   sound: 'C5',
-                  color: 'red'
+                  color: '#706677',
+                  animation: 'rect',
+                  location: 570,
             },
       	"a": {
       		sound: ['C4', 'E4', 'G4'],
@@ -205,17 +221,28 @@
 				});
       			paths.push(path);
       		}
+          else if(keyData[event.key].animation == 'rect'){
+            var randx = Math.floor(Math.random() * view.size.width) + 10;
+            var randy = Math.floor(Math.random() * view.size.height) + 10;
+            path = new Path.Rectangle({
+          point: [randx, location],
+          size: [50,100],
+          strokeColor: keyPressed.color,
+              strokeWidth: 5,
+        });
+          path.fillColor = keyPressed.color;
+          paths.push(path);
+        }
       		else {
-                        var randx = Math.floor(Math.random() * view.size.width) + 10;
-				var point = [randx, location];
-                        var newCircle = new Path.Circle(point, 500)
+              var randx = Math.floor(Math.random() * view.size.width) + 10;
+				      var point = [randx, location];
+              var newCircle = new Path.Circle(point, 500)
 
-                        // retrieve and fill the circle with the assigned color
-                        newCircle.fillColor = keyData[event.key].color;
-
-                        circles.push(newCircle);
-                  }
-            }
+              // retrieve and fill the circle with the assigned color
+              newCircle.fillColor = keyData[event.key].color;
+              circles.push(newCircle);
+          }
+          }
       }
 
       function onFrame(event) {
@@ -235,10 +262,13 @@
                         // smooth the path
                         path.smooth();
                   }
-      		
+
       	}
       	else if(animationtype == 'square') {
       		path.rotate(3);
+      	}
+        else if(animationtype == 'rect') {
+      		path.rotate(10);
       	}
       	else {
       		for(var i = 0; i < circles.length; i++) {
