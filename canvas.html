@@ -1,274 +1,312 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Sound Maps</title>
-	<script type="text/javascript" src="paper-full.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
-	<script type="text/javascript" src="https://tonejs.github.io/build/Tone.js"></script>
-	<link rel="stylesheet" type="text/css" href="canvas.css">
+  <head>
+    <title>Sound Maps</title>
+    <script type="text/javascript" src="paper-full.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://tonejs.github.io/build/Tone.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="canvas.css" />
 
-	<script type="text/paperscript" canvas="myCanvas">
-		// map a-z, 0-9 keys to various sounds and colors
-		var keyData = {
-			q: {
-				sound: new Howl({
-					src: ['sounds/bubbles.mp3']
-				}),
-				color: 'red'
-			},
-			w: {
-				sound: new Howl({
-					src: ['sounds/clay.mp3']
-				}),
-				color: 'orange'
-			},
-			e: {
-				sound: new Howl({
-					src: ['sounds/confetti.mp3']
-				}),
-				color: 'yellow'
-			},
-			r: {
-				sound: new Howl({
-					src: ['sounds/corona.mp3']
-				}),
-				color: 'green'
-			},
-				t: {
-				sound: new Howl({
-					src: ['sounds/dotted-spiral.mp3']
-				}),
-				color: 'blue'
-			},
-			y: {
-				sound: new Howl({
-					src: ['sounds/flash-1.mp3']
-				}),
-				color: 'purple'
-			},
-			u: {
-				sound: new Howl({
-					src: ['sounds/flash-2.mp3']
-				}),
-				color: '#729847'
-			},
-			i: {
-				sound: new Howl({
-					src: ['sounds/flash-3.mp3']
-				}),
-				color: 'red'
-			},
-			o: {
-				sound: new Howl({
-					src: ['sounds/glimmer.mp3']
-				}),
-				color: 'red'
-			},
-			p: {
-				sound: new Howl({
-					src: ['sounds/moon.mp3']
-				}),
-				color: 'red'
-			},
-			a: {
-				sound: ['C4', 'E4', 'G4'],
-				color: 'red'
-			},
-			s: {
-				sound: ['D4', 'F4', 'A4'],
-				color: 'red'
-			},
-			d: {
-				sound: ['E4', 'G4', 'B4'],
-				color: 'red'
-			},
-			f: {
-				sound: ['F4', 'A4', 'C5'],
-				color: 'red'
-			},
-			g: {
-				sound: new Howl({
-					src: ['sounds/prism-2.mp3']
-				}),
-				color: 'red'
-			},
-			h: {
-				sound: new Howl({
-					src: ['sounds/prism-3.mp3']
-				}),
-				color: 'red'
-			},
-			j: {
-				sound: ['G4', 'B4', 'D5'],
-				color: 'red'
-			},
-			k: {
-				sound: ['A4', 'C5', 'E5'],
-				color: 'red'
-			},
-			l: {
-				sound: ['B4', 'D5', 'F5'],
-				color: 'red'
-			},
-			z: {
-				sound: new Howl({
-					src: ['sounds/suspension.mp3']
-				}),
-				color: 'red'
-			},
-			x: {
-				sound: new Howl({
-					src: ['sounds/timer.mp3']
-				}),
-				color: 'red'
-			},
-			c: {
-				sound: new Howl({
-					src: ['sounds/ufo.mp3']
-				}),
-				color: 'red'
-			},
-			v: {
-				sound: new Howl({
-					src: ['sounds/veil.mp3']
-				}),
-				color: 'red'
-			},
-			b: {
-				sound: new Howl({
-					src: ['sounds/wipe.mp3']
-				}),
-				color: 'red'
-			},
-			n: {
-				sound: new Howl({
-					src: ['sounds/zig-zag.mp3']
-				}),
-				color: 'red'
-			},
-			m: {
-				sound: new Howl({
-					src: ['sounds/bubbles.mp3']
-				}),
-				color: 'red'
-			},
-			0: {
-				sound: new Howl({
-					src: ['sounds/pinwheel.mp3']
-				}),
-				color: 'green'
-			},
-			1: {
-				sound: new Howl({
-					src: ['sounds/clay.mp3']
-				}),
-				color: 'green'
-			},
-			2: {
-				sound: new Howl({
-					src: ['sounds/confetti.mp3']
-				}),
-				color: 'green'
-			},
-			3: {
-				sound: new Howl({
-					src: ['sounds/corona.mp3']
-				}),
-				color: 'green'
-			},
-			4: {
-				sound: new Howl({
-					src: ['sounds/dotted-spiral.mp3']
-				}),
-				color: 'green'
-			},
-			5: {
-				sound: new Howl({
-					src: ['sounds/flash-1.mp3']
-				}),
-				color: 'green'
-			},
-			6: {
-				sound: new Howl({
-					src: ['sounds/flash-2.mp3']
-				}),
-				color: 'green'
-			},
-			7: {
-				sound: new Howl({
-					src: ['sounds/flash-3.mp3']
-				}),
-				color: 'green'
-			},
-			8: {
-				sound: new Howl({
-					src: ['sounds/glimmer.mp3']
-				}),
-				color: 'green'
-			},
-			9: {
-				sound: new Howl({
-					src: ['sounds/moon.mp3']
-				}),
-				color: 'green'
-			},
-			";": {
-				sound: ['C5', 'E5', 'G5'],
-				color: 'green'
-			},
+    <script type="text/paperscript" canvas="myCanvas">
+      // map a-z, 0-9 keys to various sounds and colors
+      var keyData = {
+      	q: {
+      		sound: new Howl({
+      			src: ['sounds/bubbles.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	w: {
+      		sound: new Howl({
+      			src: ['sounds/clay.mp3']
+      		}),
+      		color: 'orange'
+      	},
+      	e: {
+      		sound: new Howl({
+      			src: ['sounds/confetti.mp3']
+      		}),
+      		color: 'yellow'
+      	},
+      	r: {
+      		sound: new Howl({
+      			src: ['sounds/corona.mp3']
+      		}),
+      		color: 'green'
+      	},
+      		t: {
+      		sound: new Howl({
+      			src: ['sounds/dotted-spiral.mp3']
+      		}),
+      		color: 'blue'
+      	},
+      	y: {
+      		sound: new Howl({
+      			src: ['sounds/flash-1.mp3']
+      		}),
+      		color: 'purple'
+      	},
+      	u: {
+      		sound: new Howl({
+      			src: ['sounds/flash-2.mp3']
+      		}),
+      		color: '#729847'
+      	},
+      	i: {
+      		sound: new Howl({
+      			src: ['sounds/flash-3.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	o: {
+      		sound: new Howl({
+      			src: ['sounds/glimmer.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	p: {
+      		sound: new Howl({
+      			src: ['sounds/moon.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	a: {
+      		sound: ['C4', 'E4', 'G4'],
+      		color: '#FFC857',
+      		animation: 'square',
+					location: 20,
+      	},
+      	s: {
+      		sound: ['D4', 'F4', 'A4'],
+      		color: '#BCD8C1',
+      		animation: 'sine',
+					location: 100,
+      	},
+      	d: {
+      		sound: ['E4', 'G4', 'B4'],
+      		color: '#EAD2AC',
+					animation: 'circle',
+					location: 180,
+      	},
+      	f: {
+      		sound: ['F4', 'A4', 'C5'],
+      		color: '#DF928E',
+					animation: 'square',
+					location: 260,
+      	},
+      	j: {
+      		sound: ['G4', 'B4', 'D5'],
+      		color: '#C58882',
+					animation: 'sine',
+					location: 340,
+      	},
+      	k: {
+      		sound: ['A4', 'C5', 'E5'],
+      		color: '#A52422',
+					animation: 'circle',
+					location: 420,
+      	},
+      	l: {
+      		sound: ['B4', 'D5', 'F5'],
+      		color: '#5E6472',
+					animation: 'square',
+					location: 490,
+      	},
+      	z: {
+      		sound: new Howl({
+      			src: ['sounds/suspension.mp3']
+      		}),
+      		color: 'red',
+      	},
+      	x: {
+      		sound: new Howl({
+      			src: ['sounds/timer.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	c: {
+      		sound: new Howl({
+      			src: ['sounds/ufo.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	v: {
+      		sound: new Howl({
+      			src: ['sounds/veil.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	b: {
+      		sound: new Howl({
+      			src: ['sounds/wipe.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	n: {
+      		sound: new Howl({
+      			src: ['sounds/zig-zag.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	m: {
+      		sound: new Howl({
+      			src: ['sounds/bubbles.mp3']
+      		}),
+      		color: 'red'
+      	},
+      	0: {
+      		sound: new Howl({
+      			src: ['sounds/pinwheel.mp3']
+      		}),
+      		color: 'green'
+      	},
+      	1: {
+      		sound: new Howl({
+      			src: ['sounds/clay.mp3']
+      		}),
+      		color: 'green'
+      	},
+      	";": {
+      		sound: ['C5', 'E5', 'G5'],
+      		color: '#B38D97',
+					animation: 'sine',
+					location: 560,
+      	},
+      }
+
+
+			var circles = [];
+			var keypressed = ".";
+			var amount;
+			var height;
+			var path;
+			var paths = [];
+			var location = 100;
+
+      function onKeyDown(event) {
+      	// condition on the key pressed
+      	console.log(event.key);
+
+      	keypressed = keyData[event.key];
+
+      	//creates 4 instances of the Tone.Synth
+      	var distortion = new Tone.Distortion(0)
+      	var vibrato = new Tone.Vibrato(2, 2)
+      	//var polySynth = new Tone.PolySynth(4, Tone.Synth).toMaster();
+      	var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(distortion, vibrato, Tone.Master)
+				location = keypressed.location;
+      	if(keyData[event.key]) {
+      		if (keyData[event.key].animation == 'sine') {
+      			// The amount of segment points we want to create:
+      					amount = 5;
+
+      					// The maximum height of the wave:
+      					height = 60;
+
+      					var color = keypressed.color;
+      					// Create a new path and style it:
+      					path = new Path({
+      						// 80% black:
+      						strokeColor: color,
+      						strokeWidth: 20,
+      						strokeCap: 'square'
+      					});
+
+      					// Add 5 segment points to the path spread out
+      					// over the width of the view:
+      					for (var i = 0; i <= amount; i++) {
+      						path.add(new Point(i / amount, 1) * view.size);
+      					}
+
+      					// Select the path, so we can see how it is constructed:
+      					// path.selected = true;
+      					paths.push(path);
+      				}
+      		else if(keyData[event.key].animation == 'square'){
+      			var randx = Math.floor(Math.random() * view.size.width) + 10;
+      			var randy = Math.floor(Math.random() * view.size.height) + 10;
+      			path = new Path.Rectangle({
+      					point: [randx, location],
+      					size: [100,100],
+      					strokeColor: keypressed.color,
+								strokeWidth: 5,
+      				});
+      			paths.push(path);
+      		}
+      		else {
+					var randx = Math.floor(Math.random() * view.size.width) + 10;
+					var point = [randx, location];
+      		// // generate a random origin point for each circle
+      		// var maxPoint = new Point(view.size.width, view.size.height);
+      		// var randomPoint = Point.random();
+      		// var point = maxPoint * randomPoint;
+      		var newCircle = new Path.Circle(point, 500)
+
+      		// retrieve and fill the circle with the assigned color
+      		newCircle.fillColor = keyData[event.key].color;
+
+      		circles.push(newCircle);
+      	}
+      	// play the appropriate sound
+      	polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
+
+      	//polySynth.triggerAttack(['C4', 'E4', 'G4', 'B4']);
+      	//polySynth.triggerRelease(['C4', 'E4', 'G4', 'B4']);
+      }
+      }
+
+      function onFrame(event) {
+      	var animationtype = keypressed.animation;
+      	if (animationtype == 'sine') {
+      					// Loop through the segments of the path:
+      		for (var i = 0; i <= amount; i++) {
+      			var segment = path.segments[i];
+
+      			// A cylic value between -1 and 1
+      			var sinus = Math.sin(event.time * 3 + i);
+
+      			// Change the y position of the segment point:
+      			segment.point.y = sinus * height + location;
+      		}
+
+      		// Uncomment the following line and run the script again
+      		// to smooth the path:
+      		path.smooth();
+      	}
+      	else if(animationtype == 'square'){
+      		path.rotate(3);
+      	}
+      	else{
+
+      		for(var i = 0; i < circles.length; i++) {
+						if (circles[i]. area > 350){
+	      			// make circles disappear and gradually change color
+	      			circles[i].scale(0.9);
+	      			circles[i].fillColor.hue += 0.8;
+						}
+      			// if(circles[i].area < 2) {
+      			// 	circles[i].remove();
+      			// 	circles.splice(i, 1);
+      			// }
+      		// }
+      	}
+      	// for(var i = 0; i < paths.length; i++){
+      	// 	if(paths[i] > 1){
+      	// 		paths[i].remove();
+      	// 		paths.splice(i, 1);
+      	// 	}
+      	// }
+      }
 		}
-
-		var circles = [];
-
-		function onKeyDown(event) {
-			// condition on the key pressed
-			console.log(event.key);
-			if(keyData[event.key]) {
-				// generate a random origin point for each circle
-				var maxPoint = new Point(view.size.width, view.size.height);
-				var randomPoint = Point.random();
-				var point = maxPoint * randomPoint;
-				var newCircle = new Path.Circle(point, 500)
-
-				// retrieve and fill the circle with the assigned color
-				newCircle.fillColor = keyData[event.key].color;
-
-				// play the appropriate sound
-				// keyData[event.key].sound.play();
-
-				// test stuff
-				// var synth = new Tone.Synth().toMaster();
-				// synth.triggerAttackRelease('G4', '8n');
-
-				//creates 4 instances of the Tone.Synth
-				var distortion = new Tone.Distortion(0)
-				var vibrato = new Tone.Vibrato(2, 2)
-				//var polySynth = new Tone.PolySynth(4, Tone.Synth).toMaster();
-				var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(distortion, vibrato, Tone.Master)
-				polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
-
-				//polySynth.triggerAttack(['C4', 'E4', 'G4', 'B4']);
-				//polySynth.triggerRelease(['C4', 'E4', 'G4', 'B4']);
-
-				circles.push(newCircle);
-			}
-		}
-
-		function onFrame(event) {
-			for(var i = 0; i < circles.length; i++) {
-				// make circles disappear and gradually change color
-				circles[i].scale(0.9);
-				circles[i].fillColor.hue += 0.8;
-				
-				if(circles[i].area < 2) {
-					circles[i].remove();
-					circles.splice(i, 1);
-				}
-			}
-		}
-	</script>
-</head>
-<body>
-	<canvas id="myCanvas" resize></canvas>
-</body>
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas" resize></canvas>
+  </body>
 </html>
