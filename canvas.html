@@ -4,6 +4,7 @@
 	<title>Sound Maps</title>
 	<script type="text/javascript" src="paper-full.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
+	<script type="text/javascript" src="https://tonejs.github.io/build/Tone.js"></script>
 	<link rel="stylesheet" type="text/css" href="canvas.css">
 
 	<script type="text/paperscript" canvas="myCanvas">
@@ -70,27 +71,19 @@
 				color: 'red'
 			},
 			a: {
-				sound: new Howl({
-					src: ['sounds/pinwheel.mp3']
-				}),
+				sound: ['C4', 'E4', 'G4'],
 				color: 'red'
 			},
 			s: {
-				sound: new Howl({
-					src: ['sounds/piston-1.mp3']
-				}),
+				sound: ['D4', 'F4', 'A4'],
 				color: 'red'
 			},
-				d: {
-				sound: new Howl({
-					src: ['sounds/piston-2.mp3']
-				}),
+			d: {
+				sound: ['E4', 'G4', 'B4'],
 				color: 'red'
 			},
 			f: {
-				sound: new Howl({
-					src: ['sounds/prism-1.mp3']
-				}),
+				sound: ['F4', 'A4', 'C5'],
 				color: 'red'
 			},
 			g: {
@@ -106,21 +99,15 @@
 				color: 'red'
 			},
 			j: {
-				sound: new Howl({
-					src: ['sounds/splits.mp3']
-				}),
+				sound: ['G4', 'B4', 'D5'],
 				color: 'red'
 			},
 			k: {
-				sound: new Howl({
-					src: ['sounds/squiggle.mp3']
-				}),
+				sound: ['A4', 'C5', 'E5'],
 				color: 'red'
 			},
 			l: {
-				sound: new Howl({
-					src: ['sounds/strike.mp3']
-				}),
+				sound: ['B4', 'D5', 'F5'],
 				color: 'red'
 			},
 			z: {
@@ -225,12 +212,17 @@
 				}),
 				color: 'green'
 			},
+			";": {
+				sound: ['C5', 'E5', 'G5'],
+				color: 'green'
+			},
 		}
 
 		var circles = [];
 
 		function onKeyDown(event) {
 			// condition on the key pressed
+			console.log(event.key);
 			if(keyData[event.key]) {
 				// generate a random origin point for each circle
 				var maxPoint = new Point(view.size.width, view.size.height);
@@ -242,7 +234,21 @@
 				newCircle.fillColor = keyData[event.key].color;
 
 				// play the appropriate sound
-				keyData[event.key].sound.play();
+				// keyData[event.key].sound.play();
+
+				// test stuff
+				// var synth = new Tone.Synth().toMaster();
+				// synth.triggerAttackRelease('G4', '8n');
+
+				//creates 4 instances of the Tone.Synth
+				var distortion = new Tone.Distortion(0)
+				var vibrato = new Tone.Vibrato(2, 2)
+				//var polySynth = new Tone.PolySynth(4, Tone.Synth).toMaster();
+				var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(distortion, vibrato, Tone.Master)
+				polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
+
+				//polySynth.triggerAttack(['C4', 'E4', 'G4', 'B4']);
+				//polySynth.triggerRelease(['C4', 'E4', 'G4', 'B4']);
 
 				circles.push(newCircle);
 			}
