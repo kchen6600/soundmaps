@@ -1,4 +1,4 @@
-# soundMaps
+# soundmaps
 
 GENED 1080 Final Project
 - Sources for Visual Aspects: http://paperjs.org/
