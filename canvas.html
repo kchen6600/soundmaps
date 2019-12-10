@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Sound Maps</title>
     <script type="text/javascript" src="paper-full.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
     <script type="text/javascript" src="https://tonejs.github.io/build/Tone.js"></script>
     <link rel="stylesheet" type="text/css" href="canvas.css" />
 
@@ -11,281 +12,279 @@
     // Sources for Visual Aspects: http://paperjs.org/
     // Sources for Sound Aspects: https://tonejs.github.io/build/Tone.js
 
-      // map select keys to various sounds and colors
-      var keyData = {
-      	"q": {
-                  sound: 'C4',
-                  color: '#4E3D42',
-                  animation: 'rect',
-                  location: 20,
-            },
-            "w": {
-                  sound: 'C#4',
-                  color: '#85756E',
-                  animation: 'rect',
-                  location: 90,
-            },
-            "e": {
-                  sound: 'D#4',
-                  color: '#8499B1',
-                  animation: 'rect',
-                  location: 160,
-            },
-            "r": {
-                  sound: 'F4',
-                  color: '#5E807F',
-                  animation: 'rect',
-                  location: 250,
-            },
-            "u": {
-                  sound: 'G4',
-                  color: '#104F55',
-                  animation: 'rect',
-                  location: 340,
-            },
-      	"i": {
-                  sound: 'G#4',
-                  color: '#556F7A',
-                  animation: 'rect',
-                  location: 430,
-            },
-            "o": {
-                  sound: 'A#4',
-                  color: '#88958D',
-                  animation: 'rect',
-                  location: 520,
-            },
-            "p": {
-                  sound: 'C5',
-                  color: '#706677',
-                  animation: 'rect',
-                  location: 570,
-            },
-      	"a": {
-      		sound: ['C4', 'E4', 'G4'],
-      		color: '#FFC857',
-      		animation: 'square',
-					location: 20,
-      	},
-      	"s": {
-      		sound: ['D4', 'F4', 'A4'],
-      		color: '#BCD8C1',
-      		animation: 'sine',
-					location: 100,
-      	},
-      	"d": {
-      		sound: ['E4', 'G4', 'B4'],
-      		color: '#EAD2AC',
-					animation: 'circle',
-					location: 180,
-      	},
-      	"f": {
-      		sound: ['F4', 'A4', 'C5'],
-      		color: '#DF928E',
-					animation: 'square',
-					location: 260,
-      	},
-      	"j": {
-      		sound: ['G4', 'B4', 'D5'],
-      		color: '#C58882',
-					animation: 'sine',
-					location: 340,
-      	},
-      	"k": {
-      		sound: ['A4', 'C5', 'E5'],
-      		color: '#A52422',
-					animation: 'circle',
-					location: 420,
-      	},
-      	"l": {
-      		sound: ['B4', 'D5', 'F5'],
-      		color: '#5E6472',
-					animation: 'square',
-					location: 490,
-      	},
-            ";": {
-                  sound: ['C5', 'E5', 'G5'],
-                  color: '#B38D97',
-                  animation: 'sine',
-                  location: 560,
-            },
-      	"1": { // distortion effect
-                  on: false
-            },
-            "2": { // vibrato effect
-                  on: false
-            },
-      }
+    // map select keys to various sounds and animations
+    var keyData = {
+        "q": {
+            sound: 'C4',
+            color: '#4E3D42',
+            animation: 'rect',
+            location: 20,
+        },
+        "w": {
+            sound: 'C#4',
+            color: '#85756E',
+            animation: 'rect',
+            location: 90,
+        },
+        "e": {
+            sound: 'D#4',
+            color: '#8499B1',
+            animation: 'rect',
+            location: 160,
+        },
+        "r": {
+            sound: 'F4',
+            color: '#5E807F',
+            animation: 'rect',
+            location: 250,
+        },
+        "u": {
+            sound: 'G4',
+            color: '#104F55',
+            animation: 'rect',
+            location: 340,
+        },
+        "i": {
+            sound: 'G#4',
+            color: '#556F7A',
+            animation: 'rect',
+            location: 430,
+        },
+        "o": {
+            sound: 'A#4',
+            color: '#88958D',
+            animation: 'rect',
+            location: 520,
+        },
+        "p": {
+            sound: 'C5',
+            color: '#706677',
+            animation: 'rect',
+            location: 570,
+        },
+        "a": {
+            sound: ['C4', 'E4', 'G4'],
+            color: '#FFC857',
+            animation: 'square',
+            location: 20,
+        },
+        "s": {
+            sound: ['D4', 'F4', 'A4'],
+            color: '#BCD8C1',
+            animation: 'sine',
+            location: 100,
+        },
+        "d": {
+            sound: ['E4', 'G4', 'B4'],
+            color: '#EAD2AC',
+            animation: 'circle',
+            location: 180,
+        },
+        "f": {
+            sound: ['F4', 'A4', 'C5'],
+            color: '#DF928E',
+            animation: 'square',
+            location: 260,
+        },
+        "j": {
+            sound: ['G4', 'B4', 'D5'],
+            color: '#C58882',
+            animation: 'sine',
+            location: 340,
+        },
+        "k": {
+            sound: ['A4', 'C5', 'E5'],
+            color: '#A52422',
+            animation: 'circle',
+            location: 420,
+        },
+        "l": {
+            sound: ['B4', 'D5', 'F5'],
+            color: '#5E6472',
+            animation: 'square',
+            location: 490,
+        },
+        ";": {
+            sound: ['C5', 'E5', 'G5'],
+            color: '#B38D97',
+            animation: 'sine',
+            location: 560,
+        },
+        "1": {
+            on: false // distortion effect
+        },
+        "2": {
+            on: false // vibrato effect
+        },
+    }
 
-	var circles = [];
-	var keyPressed = ".";
-	var amount;
-	var height;
-	var path;
-	var paths = [];
-	var location = 100;
+    var circles = [];
+    var keyPressed = ".";
+    var amount;
+    var height;
+    var path;
+    var paths = [];
+    var location = 100;
 
-      var chords = ["a", "s", "d", "f", "j", "k", "l", ";"]; // C ionian scale triads
-      var scale = ["q", "w", "e", "r", "u", "i", "o", "p"]; // C phrygian scale
+    var chords = ["a", "s", "d", "f", "j", "k", "l", ";"]; // C ionian scale triads
+    var scale = ["q", "w", "e", "r", "u", "i", "o", "p"]; // C phrygian scale
 
-      function onKeyDown(event) {
-      	console.log(event.key);
+    function onKeyDown(event) {
+        console.log(event.key);
 
-      	if(keyData[event.key]) {
-                  if(event.key === "1" || event.key === "2"){
-                        keyData[event.key].on = !keyData[event.key].on;
-                        console.log(keyData[event.key].on);
-                  } else {
-                        // case 1: no distortion or vibrato
-                        if(!keyData["1"].on && !keyData["2"].on) {
-                              if(chords.includes(event.key)) {
-                                    // use 3 instances of Tone.Synth to create a chord
-                                    var polySynth = new Tone.PolySynth(3, Tone.Synth).toMaster();
-                                    polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
-                              } else if(scale.includes(event.key)) {
-                                    // use 1 instance of Tone.Synth to create a note
-                                    var synth = new Tone.Synth().toMaster();
-                                    synth.triggerAttackRelease(keyData[event.key].sound, '4n');
-                              }
-                        } else if(keyData["1"].on && !keyData["2"].on) { // case 2: distortion and no vibrato
-                              var distortion = new Tone.Distortion(1);
-                              if(chords.includes(event.key)) {
-                                    // use 3 instances of Tone.Synth to create a chord
-                                    var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(distortion, Tone.Master);
-                                    polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
-                              } else if(scale.includes(event.key)) {
-                                    // use 1 instance of Tone.Synth to create a note
-                                    var synth = new Tone.Synth().chain(distortion, Tone.Master);
-                                    synth.triggerAttackRelease(keyData[event.key].sound, '4n');
-                              }
-                        } else if(!keyData["1"].on && keyData["2"].on) { // case 3: vibrato and no distortion
-                              var vibrato = new Tone.Vibrato(2, 2);
-                              if(chords.includes(event.key)) {
-                                    // use 3 instances of Tone.Synth to create a chord
-                                    var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(vibrato, Tone.Master);
-                                    polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
-                              } else if(scale.includes(event.key)) {
-                                    // use 1 instance of Tone.Synth to create a note
-                                    var synth = new Tone.Synth().chain(vibrato, Tone.Master);
-                                    synth.triggerAttackRelease(keyData[event.key].sound, '4n');
-                              }
-                        } else { // case 4: distortion and vibrato
-                              var distortion = new Tone.Distortion(1);
-                              var vibrato = new Tone.Vibrato(2, 2);
-                              if(chords.includes(event.key)) {
-                                    // use 3 instances of Tone.Synth to create a chord
-                                    var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(distortion, vibrato, Tone.Master);
-                                    polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
-                              } else if(scale.includes(event.key)) {
-                                    // use 1 instance of Tone.Synth to create a note
-                                    var synth = new Tone.Synth().chain(distortion, vibrato, Tone.Master);
-                                    synth.triggerAttackRelease(keyData[event.key].sound, '4n');
-                              }
-                        }
-                  }
-
-                  keyPressed = keyData[event.key];
-                  location = keyPressed.location;
-
-      		if (keyData[event.key].animation == 'sine') {
-      			// the amount of segment points we want to create
-				amount = 5;
-
-				// the maximum height of the wave
-				height = 60;
-
-				var color = keyPressed.color;
-				// Create a new path and style it:
-				path = new Path({
-					// 80% black:
-					strokeColor: color,
-					strokeWidth: 20,
-					strokeCap: 'square'
-				});
-
-				// add 5 segment points to the path spread out
-				// over the width of the view:
-				for (var i = 0; i <= amount; i++) {
-					path.add(new Point(i / amount, 1) * view.size);
-				}
-
-				// Select the path, so we can see how it is constructed:
-				// path.selected = true;
-				paths.push(path);
-			}
-      		else if(keyData[event.key].animation == 'square'){
-      			var randx = Math.floor(Math.random() * view.size.width) + 10;
-      			var randy = Math.floor(Math.random() * view.size.height) + 10;
-      			path = new Path.Rectangle({
-					point: [randx, location],
-					size: [100,100],
-					strokeColor: keyPressed.color,
-							strokeWidth: 5,
-				});
-      			paths.push(path);
-      		}
-          else if(keyData[event.key].animation == 'rect'){
-            var randx = Math.floor(Math.random() * view.size.width) + 10;
-            var randy = Math.floor(Math.random() * view.size.height) + 10;
-            path = new Path.Rectangle({
-          point: [randx, location],
-          size: [50,100],
-          strokeColor: keyPressed.color,
-              strokeWidth: 5,
-        });
-          path.fillColor = keyPressed.color;
-          paths.push(path);
-        }
-      		else {
-              var randx = Math.floor(Math.random() * view.size.width) + 10;
-				      var point = [randx, location];
-              var newCircle = new Path.Circle(point, 500)
-
-              // retrieve and fill the circle with the assigned color
-              newCircle.fillColor = keyData[event.key].color;
-              circles.push(newCircle);
-          }
-          }
-      }
-
-      function onFrame(event) {
-      	var animationtype = keyPressed.animation;
-      	if (animationtype == 'sine') {
-      		// loop through the segments of the path:
-      		for (var i = 0; i <= amount; i++) {
-      			var segment = path.segments[i];
-
-      			// a cylic value between -1 and 1
-      			var sinus = Math.sin(event.time * 3 + i);
-
-      			// change the y position of the segment point
-      			segment.point.y = sinus * height + location;
-      		}
-                  if(!keyData["1"].on) {
-                        // smooth the path
-                        path.smooth();
-                  }
-
-      	}
-      	else if(animationtype == 'square') {
-      		path.rotate(3);
-      	}
-        else if(animationtype == 'rect') {
-      		path.rotate(10);
-      	}
-      	else {
-      		for(var i = 0; i < circles.length; i++) {
-				if (circles[i]. area > 350) {
-            			// make circles disappear and gradually change color
-            			circles[i].scale(0.9);
-            			circles[i].fillColor.hue += 0.8;
-				}
-      	      }
+        if (keyData[event.key]) {
+            if (event.key === "1" || event.key === "2") {
+                keyData[event.key].on = !keyData[event.key].on;
+                console.log(keyData[event.key].on);
+            } else {
+                // case 1: distortion off, vibrato off
+                if (!keyData["1"].on && !keyData["2"].on) {
+                    if (chords.includes(event.key)) {
+                        // use 3 instances of Tone.Synth to create a chord
+                        var polySynth = new Tone.PolySynth(3, Tone.Synth).toMaster();
+                        polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
+                    } else if (scale.includes(event.key)) {
+                        // use 1 instance of Tone.Synth to create a note
+                        var synth = new Tone.Synth().toMaster();
+                        synth.triggerAttackRelease(keyData[event.key].sound, '4n');
+                    }
+                // case 2: distortion on, vibrato off
+                } else if (keyData["1"].on && !keyData["2"].on) {
+                    var distortion = new Tone.Distortion(1);
+                    if (chords.includes(event.key)) {
+                        // use 3 instances of Tone.Synth to create a chord
+                        var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(distortion, Tone.Master);
+                        polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
+                    } else if (scale.includes(event.key)) {
+                        // use 1 instance of Tone.Synth to create a note
+                        var synth = new Tone.Synth().chain(distortion, Tone.Master);
+                        synth.triggerAttackRelease(keyData[event.key].sound, '4n');
+                    }
+                // case 3: distortion off, vibrato on
+                } else if (!keyData["1"].on && keyData["2"].on) {
+                    var vibrato = new Tone.Vibrato(2, 2);
+                    if (chords.includes(event.key)) {
+                        // use 3 instances of Tone.Synth to create a chord
+                        var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(vibrato, Tone.Master);
+                        polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
+                    } else if (scale.includes(event.key)) {
+                        // use 1 instance of Tone.Synth to create a note
+                        var synth = new Tone.Synth().chain(vibrato, Tone.Master);
+                        synth.triggerAttackRelease(keyData[event.key].sound, '4n');
+                    }
+                // case 4: distortion on, vibrato on
+                } else {
+                    var distortion = new Tone.Distortion(1);
+                    var vibrato = new Tone.Vibrato(2, 2);
+                    if (chords.includes(event.key)) {
+                        // use 3 instances of Tone.Synth to create a chord
+                        var polySynth = new Tone.PolySynth(3, Tone.Synth).chain(distortion, vibrato, Tone.Master);
+                        polySynth.triggerAttackRelease(keyData[event.key].sound, '8n');
+                    } else if (scale.includes(event.key)) {
+                        // use 1 instance of Tone.Synth to create a note
+                        var synth = new Tone.Synth().chain(distortion, vibrato, Tone.Master);
+                        synth.triggerAttackRelease(keyData[event.key].sound, '4n');
+                    }
+                }
             }
-	}
+
+            keyPressed = keyData[event.key];
+            location = keyPressed.location;
+
+            // create sine wave animation
+            if (keyData[event.key].animation == 'sine') {
+                // the amount of segment points we want to create
+                amount = 5;
+
+                // the maximum height of the wave
+                height = 60;
+
+                var color = keyPressed.color;
+                // create a new path and style it
+                path = new Path({
+                    // 80% black:
+                    strokeColor: color,
+                    strokeWidth: 20,
+                    strokeCap: 'square'
+                });
+
+                // add 5 segment points to the path spread out over the width of the view
+                for (var i = 0; i <= amount; i++) {
+                    path.add(new Point(i / amount, 1) * view.size);
+                }
+
+                paths.push(path);
+            // create square animation
+            } else if (keyData[event.key].animation == 'square') {
+                var randx = Math.floor(Math.random() * view.size.width) + 10;
+                var randy = Math.floor(Math.random() * view.size.height) + 10;
+                path = new Path.Rectangle({
+                    point: [randx, location],
+                    size: [100, 100],
+                    strokeColor: keyPressed.color,
+                    strokeWidth: 5,
+                });
+                paths.push(path);
+            // create rectangle animation
+            } else if (keyData[event.key].animation == 'rect') {
+                var randx = Math.floor(Math.random() * view.size.width) + 10;
+                var randy = Math.floor(Math.random() * view.size.height) + 10;
+                path = new Path.Rectangle({
+                    point: [randx, location],
+                    size: [50, 100],
+                    strokeColor: keyPressed.color,
+                    strokeWidth: 5,
+                });
+                path.fillColor = keyPressed.color;
+                paths.push(path);
+            // create circle animation
+            } else {
+                var randx = Math.floor(Math.random() * view.size.width) + 10;
+                var point = [randx, location];
+                var newCircle = new Path.Circle(point, 500)
+
+                // retrieve and fill the circle with the assigned color
+                newCircle.fillColor = keyData[event.key].color;
+                circles.push(newCircle);
+            }
+        }
+    }
+
+    function onFrame(event) {
+        var animationtype = keyPressed.animation;
+        if (animationtype == 'sine') {
+            // loop through the segments of the path
+            for (var i = 0; i <= amount; i++) {
+                var segment = path.segments[i];
+
+                // a cylic value between -1 and 1
+                var sinus = Math.sin(event.time * 3 + i);
+
+                // change the y position of the segment point
+                segment.point.y = sinus * height + location;
+            }
+            // when distortion is off, smooth the path
+            if (!keyData["1"].on) {
+                // smooth the path
+                path.smooth();
+            }
+        } else if (animationtype == 'square') {
+            path.rotate(3);
+        } else if (animationtype == 'rect') {
+            path.rotate(10);
+        } else {
+            for (var i = 0; i < circles.length; i++) {
+                if (circles[i].area > 350) {
+                    // make circles disappear and gradually change color as they do
+                    circles[i].scale(0.9);
+                    circles[i].fillColor.hue += 0.8;
+                }
+            }
+        }
+    }
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <canvas id="myCanvas" resize></canvas>
-  </body>
+</body>
 </html>
